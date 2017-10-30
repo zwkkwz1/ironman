@@ -1,0 +1,54 @@
+{
+	"type": 1,
+    "sid": 123,
+    "categorySid": 1,
+    "no": "abc123456",
+    "name": "全自动洗衣机",
+    "enabled": false,
+    "preview": false,
+    "startedAt": "2017-11-01 00:00:00",
+    "endedAt": "2017-12-01 00:00:00",
+    "points": 20000,
+    "experience": 500000,
+    "detail": "全自波轮动洗衣机\n洗衣效果杠杠滴，保护衣服不损伤\n你值得拥有你值得拥有你值得拥有你值得拥有你值得拥有\n让爱妻更轻松让爱妻更轻松让爱妻更轻松让爱妻更轻松让爱妻更轻松让爱妻更轻松让爱妻更轻松让爱妻更轻松让爱妻更轻松让爱妻更轻松",
+    "memo": "松下AKJ-DF475580，京东定价1500左右",
+    "thumbnail": {
+        "sid": "e46525b9-469e-4e67-91fb-fa49e07bd801",
+        "url": "http://otbtrl17r.bkt.clouddn.com/e46525b9-469e-4e67-91fb-fa49e07bd801.png"
+    },
+    "headerImages": [{
+        "sid": "0a4cf836-89d6-4a1e-8af0-23cfba7eabc1",
+        "url": "t1"
+    }, {
+        "sid": "31fc1bb6-222a-4f48-b830-681ca2bdb3b5",
+        "url": "t2"
+    }, {
+        "sid": "f49a683b-0320-424c-898f-cc05020cb87c",
+        "url": "t3"
+    }, {
+        "sid": "bcf817b2-9eb1-409e-bbec-f92263ab31f7",
+        "url": "t4"
+    }, {
+        "sid": "a30e3daa-0710-438d-a493-b2e03d325070",
+        "url": "t5"
+    }],
+    "detailImages": [{
+        "sid": "2f6499f1-47ee-4604-a6d8-d1f4a18fdf14",
+        "url": "http://img0.imgtn.bdimg.com/it/u=645685944,3659450086&fm=27&gp=0.jpg"
+    }, {
+        "sid": "7f2efb27-2f00-478d-8b03-ad5f53e5bf2d",
+        "url": "http://t.388g.com/uploads/allimg/160528/5-16052Q31928-50.jpg"
+    }, {
+        "sid": "0ee4bc27-4e1f-44ec-90c9-f44467bc423e",
+        "url": "http://f.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=bc593ec66a81800a6eb0810a84051fcc/5243fbf2b2119313dd7f38f963380cd791238dbf.jpg"
+    }, {
+        "sid": "0ee4bc27-4e1f-44ec-90c9-f44467bc423e",
+        "url": "http://f.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=bc593ec66a81800a6eb0810a84051fcc/5243fbf2b2119313dd7f38f963380cd791238dbf.jpg"
+    }, {
+        "sid": "0ee4bc27-4e1f-44ec-90c9-f44467bc423e",
+        "url": "http://f.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=bc593ec66a81800a6eb0810a84051fcc/5243fbf2b2119313dd7f38f963380cd791238dbf.jpg"
+    }, {
+        "sid": "0ee4bc27-4e1f-44ec-90c9-f44467bc423e",
+        "url": "http://f.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=bc593ec66a81800a6eb0810a84051fcc/5243fbf2b2119313dd7f38f963380cd791238dbf.jpg"
+    }]
+}

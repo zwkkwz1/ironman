@@ -1,0 +1,15 @@
+{
+	"type": 1,
+	"msg": "",
+	"result": {
+		"sid": 1,
+	    "groupSid": "0",
+	    "code": "upgrade_desc_url",
+	    "name": "APP升级说明与下载URL",
+	    "desc": "张文凯制造",
+	    "value1": "Android版apk下载URL",
+	    "value2": "Android版升级说明文本",
+	    "value3": "iOS版App Store URL",
+	    "value4": "iOS版升级说明文本"
+	}
+}

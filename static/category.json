@@ -1,0 +1,35 @@
+{
+    "type": 1,
+    "msg": "",
+    "result": {
+        "list": [{
+            "sid": 1,
+            "name": "小家电",
+            "sortNum": 9000,
+            "image": "http://otbtrl17r.bkt.clouddn.com/0a4cf836-89d6-4a1e-8af0-23cfba7eabc1.png",
+            "memo": "剃须刀、吹风机、吸尘器、电饭煲等",
+            "enabled": true
+        }, {
+            "sid": 2,
+            "name": "大家电",
+            "sortNum": 8000,
+            "image": "https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/crop%3D52%2C0%2C1175%2C776%3Bc0%3Dbaike150%2C5%2C5%2C150%2C50/sign=124c1b21082442a7ba41a7e5ec769f67/9358d109b3de9c825d45d82d6b81800a19d8436b.jpg",
+            "memo": "冰箱、电视、洗衣机、空调、洗碗机、消毒柜等白色家电",
+            "enabled": true
+        }, {
+            "sid": 3,
+            "name": "居家用品",
+            "sortNum": 7000,
+            "image": "http://otbtrl17r.bkt.clouddn.com/f49a683b-0320-424c-898f-cc05020cb87c.png",
+            "memo": "主要是床上用品和收纳用品。厨卫用品不要放在这里，应另开个分类",
+            "enabled": true
+        }, {
+            "sid": 4,
+            "name": "食品",
+            "sortNum": 6000,
+            "image": "http://otbtrl17r.bkt.clouddn.com/bcf817b2-9eb1-409e-bbec-f92263ab31f7.png",
+            "memo": "2017-12-21接到孙虎通知，暂时先下架改分类",
+            "enabled": false
+        }]
+    }
+}

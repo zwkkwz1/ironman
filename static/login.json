@@ -1,0 +1,25 @@
+{
+    "type": 1,
+    "msg": "",
+    "result": {
+        "username": "inettest",
+        "name": "测试用户",
+        "mail": "inettest@deayea.com",
+        "loginAt": "2017-08-08 22:16:08",
+        "token": "661cb65a-1755-4938-a95c-08f9e69bf485",
+        "groups": ["ironman-user", "ironman-admin"],
+        "privileges": [{
+            "code": "FST00001",
+            "name": "在线监控",
+            "category": 1,
+            "path": "/order-admin",
+            "pathName": "orderAdmin",
+            "relatedView": "@/components/order-admin",
+            "relatedViewComponent": "orderAdmin",
+            "level": 1,
+            "hasChild": false,
+            "imageUri": "oa-icon",
+            "parentSid": 0
+        }]
+    }
+}

@@ -1,0 +1,12 @@
+{
+	"type": 1,
+    "sid": 12345,
+    "name": "小家电1",
+    "sortNum": 9000,
+    "image": {
+        "sid": "e46525b9-469e-4e67-91fb-fa49e07bd801",
+        "url": "https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/crop%3D52%2C0%2C1175%2C776%3Bc0%3Dbaike150%2C5%2C5%2C150%2C50/sign=124c1b21082442a7ba41a7e5ec769f67/9358d109b3de9c825d45d82d6b81800a19d8436b.jpg"
+    },
+    "memo": "剃须刀、吹风机、吸尘器、电饭煲等",
+    "enabled": false
+}
