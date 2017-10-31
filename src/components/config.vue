@@ -45,6 +45,9 @@ const typeList = [{
   'name': '活动'
 }]
 const ruleTypeList = [{
+  'value': '',
+  'name': '全部'
+}, {
   'value': 1,
   'name': '佩戴获取积分规则'
 }, {
@@ -52,6 +55,9 @@ const ruleTypeList = [{
   'name': '签到获取积分规则'
 }]
 const pointsOrExperienceReasonList = [{
+  'value': '',
+  'name': '全部'
+}, {
   'value': 1,
   'name': '佩戴所得'
 }, {
@@ -60,9 +66,6 @@ const pointsOrExperienceReasonList = [{
 }, {
   'value': 3,
   'name': '签到获得'
-}, {
-  'value': 4,
-  'name': '兑换商品'
 }]
 import axios from 'axios'
 export default { // 存放公共方法

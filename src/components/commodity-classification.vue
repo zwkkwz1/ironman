@@ -2,6 +2,7 @@
 <div>
   <div class="table" style="margin-top: 40px;">
     <div class="btn-md btn-default" style="margin-bottom: 10px;" @click="create">新建</div>
+    <div class="err-msg" v-text="errMsg"></div>
 		<table style="min-width: 600px;width: 100%;" class="table-hover">
 		  <colgroup>
 			<col style="width:40px;"/>
@@ -56,6 +57,7 @@ export default {
   data () {
     return {
       categoryList: [],
+      errMsg: '',
       loginPopup: false,
       activeIndex: -1,
       categoryMod: false
@@ -77,7 +79,6 @@ export default {
       this.axios({
         method: 'get',
         url: '/sys/product-category/list'
-//      url: 'http://localhost:7080/static/category.json'
       }).then((response) => {
         var data = response.data
         if (data.type === 1) {
@@ -86,7 +87,8 @@ export default {
           config.gotoLogin()
           this.loginPopup = true
         } else {
-          console.log('商品分类列表获取失败')
+          this.errMsg = data.msg
+          this.hideMsg()
         }
       }).catch((error) => {
         console.log(error)
@@ -105,7 +107,8 @@ export default {
           config.gotoLogin()
           this.loginPopup = true
         } else {
-          console.log('商品分类上下架失败')
+          this.errMsg = data.msg
+          this.hideMsg()
         }
       }).catch((error) => {
         console.log(error)
@@ -116,7 +119,6 @@ export default {
         method: 'get',
         params: {'sid': category.sid},
         url: '/sys/product-category/get'
-//      url: 'http://localhost:7080/static/category-detail.json'
       }).then((response) => {
         var data = response.data
         if (data.type === 1) {
@@ -126,7 +128,8 @@ export default {
           config.gotoLogin()
           this.loginPopup = true
         } else {
-          console.log('商品分类列表获取失败')
+          this.errMsg = data.msg
+          this.hideMsg()
         }
       }).catch((error) => {
         console.log(error)
@@ -135,16 +138,14 @@ export default {
     create () { // 新建
       this.categoryMod = true
       this.categoryVo = {
-//      'name': '',
-//      'sortNum': '',
-//      'image': {
-//        'sid': '',
-//        'url': ''
-//      },
-//      'memo': '',
         'enabled': true
       }
       console.log('新建')
+    },
+    hideMsg () {
+      setTimeout(() => {
+        this.errMsg = ''
+      }, 5000)
     },
     clickTr (i) {
       this.activeIndex = i

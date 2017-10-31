@@ -1,10 +1,10 @@
 <template>
 <div>
   <div class="modal-backdrop fade in" modal-animation-class="fade" modal-backdrop="modal-backdrop" modal-animation="true" style="z-index: 1040;"></div>
-  <div v-drag class="popup" style="height: 230px;width: 400px;">
-    <div class="head" style="text-align: center;width: 400px;">
-	    <h3></h3>
-		  <i class="icon-remove icon-white" @click="cancelEdit()"></i>			  	
+  <div v-drag class="popup" style="height: 230px;width: 600px;">
+    <div class="head" style="text-align: center;width: 600px;">
+      <h3></h3>
+        <i class="icon-remove icon-white" @click="cancelEdit()"></i>			  	
 	  </div>
   	<legend>
   	  <title style="width: 100%;">字典分类信息</title>
@@ -13,21 +13,23 @@
   	  <tr>
   	    <td class="tdRight" for="code">分类编码:</td>
   	    <td>
-  	    	<span v-if="params.sid" v-text="params.code"></span>
-  	    	<input type="text" v-if="!params.sid" v-model="params.code" />
+  	      <span v-if="params.sid" v-text="params.code"></span>
+  	      <input type="text" v-if="!params.sid" v-model="params.code" />
+  	      <span class="high-light">*</span>
   	    </td>
    	  </tr>
   	  <tr>
-  	    <td class="tdRight" for="name">分类名称:	</td>
+  	    <td class="tdRight" for="name">分类名称:</td>
   	    <td>
   	      <input type="text" name="name" v-model="params.name" />
+  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	</table>
-  	<div class="btn-lg btn-default btn-table" @click="sysVoSubmit">提 交</div>
+  	<div class="btn-md btn-default btn-table" @click="sysVoSubmit">提 交</div>
   	<p class="err-msg" style="display: block;left: 78px;" v-text="errMsg"></p>
   	<div v-if="loginPopup">
-	  	<login-popup @loginSuccess='loginSuccess'></login-popup>
+	  <login-popup @loginSuccess='loginSuccess'></login-popup>
 	  </div>
   </div>
 </div>
@@ -107,6 +109,7 @@ export default {
 }
 .btn-table{
   position: relative;
-  left: 80px;
+  left: 44px;
+  margin-top: 15px;
 }
 </style>

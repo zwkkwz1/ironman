@@ -13,54 +13,63 @@
   	    <td class="tdRight" for="group">第三方平台:</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.outerPlatform"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">第三方账号:</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.outerAccount"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">订单号:</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.outerOrderId"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">订单原价:</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.outerOrderPrice"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">商品名称:</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.outerProductName"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">外部平台的商品编号:</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.outerProductNo"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">外部平台的商品链接:</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.outerProductUrl"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">实际需要支付的金额:</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.outerOrderPaidPrice"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">外部平台商品单价(原价):</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.outerProductPrice"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	</table>
@@ -98,8 +107,9 @@ export default { // 产品新增，编辑弹框
   },
   methods: {
     orderSubmit () { // 提交
-      if (!this.params.outerPlatform || !this.params.outerAccount || !this.params.outerOrderPrice || !this.params.outerOrderPaidPrice ||
-       !this.params.outerProductNo || !this.params.outerProductName || !this.params.outerProductUrl || !this.params.outerProductPrice) { // 检查表格完整性
+      delete this.params.status
+      if (!this.params.outerPlatform || !this.params.outerAccount || (!this.params.outerOrderPrice && this.params.outerOrderPrice !== 0) || (!this.params.outerOrderPaidPrice && this.params.outerOrderPaidPrice !== 0) || !this.params.outerOrderId ||
+       !this.params.outerProductNo || !this.params.outerProductName || !this.params.outerProductUrl || (!this.params.outerProductPrice && this.params.outerProductPrice !== 0)) { // 检查表格完整性
         this.errMsg = '请将订单信息填写完整'
         this.hideMsg()
         return null

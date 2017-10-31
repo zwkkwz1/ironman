@@ -32,7 +32,7 @@
   	  </div>
   	</div>
   	<div>
-  	  <label for="points">价格段：</label>
+  	  <label for="points">所需积分：</label>
   	  <input type="text" name="pointsFrom" style="width: 80px;padding-left: 10px;" v-model="comVo.pointsFrom" />
   	  <p>-</p>
   	  <input type="text" name="pointsTo" style="width: 80px;padding-left: 10px;" v-model="comVo.pointsTo" />
@@ -48,6 +48,7 @@
   	</div>
   	<div class="btn-md btn-default" @click="productQuery">查 询</div>
   	<div class="btn-md btn-default" @click="create">新 建</div>
+  	<div class="err-msg" v-text="errMsg"></div>
   	<!--<div class="btn-md btn-default" @click="productEdit('1')">虚假编辑</div>-->
   </legend>
   <div class="table">
@@ -87,6 +88,7 @@
           <td><div style="min-width:100px" v-text="product.sortNum"></div></td>
           <td>
             <div style="min-width:160px;display: inline-block;height: 26px;" v-text="product.startedAt"></div>
+            <br />
             <div style="min-width:160px;display: inline-block;height: 26px;" v-text="product.endedAt"></div>
           </td>
           <td style="min-width: 160px;">
@@ -139,6 +141,7 @@ export default {
       productList: [],
       categoryList: [],
       categorys: [],
+      errMsg: '',
       comEnabledList: [{
         'enabled': '',
         'enabledName': '全部'
@@ -212,12 +215,16 @@ export default {
         }
       }
       if (this.validFrom.date) {
-        this.validFrom.date = config.dateToString(this.validFrom.date, 'yyyy-MM-dd')
-        this.comVo.validFrom = this.validFrom.date + ' ' + this.validFrom.time ? this.validFrom.time : '00:00:00'
+        this.validFrom.date = config.dateToString(new Date(this.validFrom.date), 'yyyy-MM-dd')
+        this.comVo.validFrom = this.validFrom.date + ' ' + (this.validFrom.time ? this.validFrom.time + ':00' : '00:00:00')
       }
       if (this.validTo.date) {
-        this.validTo.date = config.dateToString(this.validTo.date, 'yyyy-MM-dd')
-        this.comVo.validTo = this.validTo.date + ' ' + this.validTo.time ? this.validTo.time : '00:00:00'
+        this.validTo.date = config.dateToString(new Date(this.validTo.date), 'yyyy-MM-dd')
+        this.comVo.validTo = this.validTo.date + ' ' + (this.validTo.time ? this.validTo.time + ':00' : '00:00:00')
+      }
+      if ((this.comVo.validTo && !this.comVo.validFrom) || (!this.comVo.validTo && this.comVo.validFrom)) {
+        this.errMsg = 'validFrom和validTo必须成对出现'
+        this.hideMsg()
       }
       this.axios({
         method: 'post',
@@ -235,7 +242,8 @@ export default {
           config.gotoLogin()
           this.loginPopup = true
         } else {
-          console.log('商品列表获取失败')
+          this.errMsg = data.msg
+          this.hideMsg()
         }
       }).catch((error) => {
         console.log(error)
@@ -255,7 +263,8 @@ export default {
           config.gotoLogin()
           this.loginPopup = true
         } else {
-          console.log('上下架失败')
+          this.errMsg = data.msg
+          this.hideMsg()
         }
       }).catch((error) => {
         console.log(error)
@@ -277,11 +286,17 @@ export default {
           config.gotoLogin()
           this.loginPopup = true
         } else {
-          console.log('商品详情获取失败')
+          this.errMsg = data.msg
+          this.hideMsg()
         }
       }).catch((error) => {
         console.log(error)
       })
+    },
+    hideMsg () {
+      setTimeout(() => {
+        this.errMsg = ''
+      }, 5000)
     },
     create () { // 新增
       this.productMod = true

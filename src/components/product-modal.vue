@@ -11,12 +11,14 @@
   	    <td class="tdRight" for="code">货号:</td>
   	    <td>
   	    	<input v-focus type="text" v-model="params.no" />
+  	    	<span class="high-light">*</span>
   	    </td>
    	  </tr>
   	  <tr>
   	    <td class="tdRight" for="name">名称:	</td>
   	    <td>
   	      <input type="text" name="name" v-model="params.name" />
+  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
@@ -24,32 +26,22 @@
   	    <select v-model="params.categorySid">
 		      <option v-for="category in categoryList" :value="category.sid">{{ category.name }}</option>
         </select>
+        <span class="high-light">*</span>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="points">所需价格:</td>
   	    <td>
   	      <input type="text" name="points" v-model="params.points" />
+  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
-  	  <!--<tr>
-  	    <td class="tdRight" for="experience">经验值门槛:</td>
-  	    <td>
-  	      <input type="text" name="experience" v-model="params.experience" />
-  	    </td>
-      </tr>-->
       <tr>
   	    <td class="tdRight" for="sortNum">排列序号:</td>
   	    <td>
   	      <input type="text" name="sortNum" v-model="params.sortNum" />
+  	      <span class="high-light">*</span>
   	    </td>
       </tr>
-      <!--<tr>
-  	    <td class="tdRight" for="sortNum">预览状态:</td>
-  	    <td>
-  	      <input type="radio" name="preview" value="true" v-model="params.preview" /> 预览
-  	      <input type="radio" name="preview" value="false" v-model="params.preview" /> 非预览
-  	    </td>
-      </tr>-->
       <tr class="time-pick">
   	    <td class="tdRight" for="startedAt">上下架时间:</td>
   	    <td>
@@ -63,13 +55,14 @@
   	  <tr>
   	    <td class="tdRight" for="detail" style="vertical-align: top;">文字说明:</td>
   	    <td>
-  	      <textarea type="text" name="detail" v-model="params.detail" rows="3"></textarea>
+  	      <textarea cols="50" name="detail" v-model="params.detail" rows="5"></textarea>
+  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="memo" style="vertical-align: top;">备注:</td>
   	    <td>
-  	      <textarea type="text" name="memo" v-model="params.memo" rows="3"></textarea>
+  	      <textarea cols="50" name="memo" v-model="params.memo" rows="5"></textarea>
   	    </td>
   	  </tr>
   	  <tr>
@@ -102,15 +95,6 @@
   	      <files-upload :type='productType' :imgUrls='params.headerImages' :url='imgUpUrl' @transmitImgInfo='getHeaderImg'></files-upload>
   	    </td>
   	  </tr>
-  	  <!--<tr>
-  	    <td class="tdRight" style="vertical-align: top;">状态:</td>
-  	    <td>
-  	      <input type="radio" name="enabled" value="true" v-model="params.enabled" />
-  	      <label for="enabled">上架</label>
-  	      <input type="radio" name="enabled" value="false" v-model="params.enabled" />
-  	      <label for="enabled">下架</label>
-  	    </td>
-  	  </tr>-->
   	</table>
     <div v-if="showOriginal" class="popup" v-drag style="left: 650px;top: 150px;z-index: 111111111111111111111111;">
 	    <div class="img-head" style="text-align: center;">
@@ -123,7 +107,7 @@
   	  <div class="btn-md btn-default btn-table btn-left" @click="productVoSubmit">提 交</div>
   	  <div class="btn-md btn-default btn-table" @click="cancel">取 消</div>
   	  <div class="err-msg" style="display: block;font-size: 12px;">提交之后商品强制变为预览状态</div>
-  	  <p class="err-msg" style="position: absolute;" v-text="errMsg"></p>
+  	  <div class="err-msg" v-text="errMsg"></div>
   	</footer>
   	<div v-if="loginPopup">
 	  	<login-popup @loginSuccess='loginSuccess'></login-popup>
@@ -205,10 +189,10 @@ export default { // 产品新增，编辑弹框
       }
       let url = this.params.sid ? '/sys/product/update' : '/sys/product/add'
       if (this.endedAt.date) {
-        this.params.endedAt = config.dateToString(new Date(this.endedAt.date), 'yyyy-MM-dd') + ' ' + this.endedAt.time + ':00'
+        this.params.endedAt = config.dateToString(new Date(this.endedAt.date), 'yyyy-MM-dd') + ' ' + (this.endedAt.time ? this.endedAt.time + ':00' : '00:00:00')
       }
       if (this.startedAt.date) {
-        this.params.startedAt = config.dateToString(new Date(this.startedAt.date), 'yyyy-MM-dd') + ' ' + this.startedAt.time + ':00'
+        this.params.startedAt = config.dateToString(new Date(this.startedAt.date), 'yyyy-MM-dd') + ' ' + (this.startedAt.time ? this.startedAt.time + ':00' : '00:00:00')
       }
       this.axios({
         method: 'post',
@@ -304,7 +288,6 @@ export default { // 产品新增，编辑弹框
 
 <style scoped>
 textarea{
-	width: 321px;
 	border-radius: 3px;
 	margin-top: 6px;
 }

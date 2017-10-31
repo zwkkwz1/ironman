@@ -141,7 +141,7 @@
 	  	    </td>
 	  	  </tr>
 	  	  <tr>
-	  	    <td class="tdRight">经验值变动:</td>
+	  	    <td class="tdRight">积分变动:</td>
 	  	    <td>
 	  	    	<span v-text="pointsVo.changed"></span>
 	  	    </td>

@@ -3,11 +3,11 @@
   <legend class="search">
   	<div>
   	  <label for="orderNo">订单号：</label>
-	  <input type="text" name="orderNo" v-model="orderVo.orderNo" />
+	    <input type="text" name="orderNo" v-model="orderVo.orderNo" />
   	</div>
   	<div>
-  	  <label for="workNo">司机工号：</label>
-	  <input type="text" name="workNo" v-model="orderVo.workNo" />
+  	  <label for="orderNo">姓名：</label>
+	    <input type="text" name="orderNo" v-model="orderVo.name" />
   	</div>
   	<div>
   	  <label for="name">时间范围：</label>
@@ -117,7 +117,7 @@ export default {
         'name': '',
         'from': '',
         'to': '',
-        'statusList': ''
+        'statusList': []
       }, // 查询条件
       order: {}, // 获得的订单详情
       orderList: [],
@@ -160,9 +160,8 @@ export default {
   },
   methods: {
     getOrderList () { // 获取系统设置列表
-      this.orderVo.statusList = []
       for (let key in this.states) {
-        this.orderVo.codes.push(this.states[key].code)
+        this.orderVo.statusList.push(this.states[key].code)
       }
       if (this.from.date) {
         this.from.date = config.dateToString(this.from.date, 'yyyy-MM-dd')

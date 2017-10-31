@@ -11,56 +11,68 @@
   	    <td class="tdRight" for="code">名 称:</td>
   	    <td>
   	      <input type="text" v-model="params.name" />
+  	      <span class="high-light">*</span>
   	    </td>
    	  </tr>
   	  <tr>
   	    <td class="tdRight" for="name">关键字:</td>
   	    <td>
   	      <input type="text" name="name" v-model="params.key" style="min-width: 400px;"/>
+  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">所属部门:</td>
   	    <select v-model="params.orgSid">
+  	    	<option :value="0"></option>
           <option v-for="ld in ldList" :value="ld.sid">{{ ld.name }}</option>
         </select>
+        <span class="high-light">*</span>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">类 型:</td>
   	    <select v-model="params.type">
           <option v-for="type in typeList" :value="type.value">{{ type.name }}</option>
         </select>
+        <span class="high-light">*</span>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="sortNum">排列序号:</td>
   	    <td>
   	      <input type="text" name="sortNum" v-model="params.sortNum" />
+  	      <span class="high-light">*</span>
   	    </td>
       </tr>
-  	  <!--<tr>
-  	    <td class="tdRight" for="createdBy">创建者:</td>
+  	  <tr>
+  	    <td class="tdRight" for="createdBy">参数1:</td>
   	    <td>
-  	      <input type="text" name="createdBy" v-model="params.createdBy" />
-  	    </td>
-      </tr>
-      <tr>
-  	    <td class="tdRight" for="createdBy">创建时间:</td>
-  	    <td>
-  	      <input type="text" name="createdBy" v-model="params.createdBy" />
-  	    </td>
-      </tr>-->
-      <!--<tr>
-  	    <td class="tdRight" for="updatedBy">更新者:</td>
-  	    <td>
-  	      <input type="text" name="updatedBy" v-model="params.updatedBy" />
+  	      <input type="text" name="createdBy" v-model="params.param1" />
   	    </td>
       </tr>
       <tr>
-  	    <td class="tdRight" for="updatedDt">更新时间:</td>
+  	    <td class="tdRight" for="createdBy">参数2:</td>
   	    <td>
-  	      <input type="text" name="updatedDt" v-model="params.updatedDt" />
+  	      <input type="text" name="createdBy" v-model="params.param2" />
   	    </td>
-      </tr>-->
+      </tr>
+      <tr>
+  	    <td class="tdRight" for="updatedBy">参数3:</td>
+  	    <td>
+  	      <input type="text" name="updatedBy" v-model="params.param3" />
+  	    </td>
+      </tr>
+      <tr>
+  	    <td class="tdRight" for="updatedDt">参数4:</td>
+  	    <td>
+  	      <input type="text" name="updatedDt" v-model="params.param4" />
+  	    </td>
+      </tr>
+      <tr>
+  	    <td class="tdRight" for="updatedDt">参数5:</td>
+  	    <td>
+  	      <input type="text" name="updatedDt" v-model="params.param5" />
+  	    </td>
+      </tr>
       <tr class="time-pick">
   	    <td class="tdRight" for="startedAt">生效时间:</td>
   	    <td>
@@ -72,9 +84,10 @@
   	    </td>
       </tr>
       <tr>
-  	    <td class="tdRight" for="memo">备 注:</td>
+  	    <td class="tdRight" for="memo" style="vertical-align: top;">备 注:</td>
   	    <td>
-  	    	<textarea name="memo" rows="4" cols="300" v-model="params.memo"></textarea>
+  	    	<textarea name="memo" rows="5" cols="50" v-model="params.memo"></textarea>
+  	    	<span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
@@ -90,7 +103,6 @@
   	<div style="text-align: center;top: 580px;height: 40px;width: 690px;">
   	  <div class="btn-md btn-default btn-table btn-left" @click="consultVoSubmit">提 交</div>
   	  <div class="btn-md btn-default btn-table" @click="cancel">取 消</div>
-  	  <div class="err-msg" style="display: block;font-size: 12px;">提交之后商品强制变为预览状态</div>
   	  <p class="err-msg" style="position: absolute;" v-text="errMsg"></p>
   	</div>
   	<div v-if="loginPopup">
@@ -146,7 +158,7 @@ export default { // 产品新增，编辑弹框
       if (this.params.endedAt) {
         this.endedAt.date = this.params.endedAt.split(' ')[0]
       }
-      if (this.startedAt.date) {
+      if (this.params.startedAt) {
         this.startedAt.date = this.params.startedAt.split(' ')[0]
       }
     })
@@ -158,15 +170,24 @@ export default { // 产品新增，编辑弹框
   },
   methods: {
     consultVoSubmit () { // 提交
+      delete this.params.updatedDt
+      delete this.params.updatedBy
+      delete this.params.createdDt
+      delete this.params.createdBy
       if (this.endedAt.date) {
-        this.params.endedAt = config.dateToString(new Date(this.endedAt.date), 'yyyy-MM-dd') + ' ' + this.endedAt.time + ':00'
+        this.params.endedAt = config.dateToString(new Date(this.endedAt.date), 'yyyy-MM-dd') + ' ' + (this.endedAt.time ? this.endedAt.time + ':00' : '00:00:00')
       }
       if (this.startedAt.date) {
-        this.params.startedAt = config.dateToString(new Date(this.startedAt.date), 'yyyy-MM-dd') + ' ' + this.startedAt.time + ':00'
+        this.params.startedAt = config.dateToString(new Date(this.startedAt.date), 'yyyy-MM-dd') + ' ' + (this.startedAt.time ? this.startedAt.time + ':00' : '00:00:00')
       }
-      if (!this.params.type || !this.params.orgSid || !this.params.key || !this.params.name || !this.params.param2 || !this.params.param3 ||
-       !this.params.memo || !this.params.param1 || !this.params.startedAt || !this.params.endedAt || !this.params.param4 || !this.params.param5) { // 检查表格完整性
+      if (!this.params.type || !this.params.key || !this.params.name ||
+       !this.params.memo || !this.params.startedAt || !this.params.endedAt) { // 检查表格完整性
         this.errMsg = '请将表格填写完整'
+        this.hideMsg()
+        return null
+      }
+      if (!this.params.param1 && !this.params.param2 && !this.params.param3 && !this.params.param4 && !this.params.param5) {
+        this.errMsg = '5个参数值必须有一个不为空'
         this.hideMsg()
         return null
       }
@@ -211,7 +232,6 @@ export default { // 产品新增，编辑弹框
 
 <style scoped>
 textarea{
-	width: 321px;
 	border-radius: 3px;
 	margin-top: 6px;
 }

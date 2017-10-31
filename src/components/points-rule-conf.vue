@@ -14,13 +14,13 @@
   	  <label for="enabled">全部</label>
   	</div>
   	<div>
-  	  <label for="type">类型：</label>
+  	  <label for="type">分类：</label>
   	  <select v-model="pointsRuleVo.type">
 		    <option v-for="type in typeList" :value="type.value">{{ type.name }}</option>
       </select>
   	</div>
   	<div>
-  	  <label for="lds">分类：</label>
+  	  <label for="lds">机务段：</label>
   	  <div class="category">
   	  	<input type="text" name="lds" :title="ldsName" v-model="ldsName" />
         <div class="categorySelect">
@@ -130,6 +130,7 @@ export default {
       isSelect: false,
       activeIndex: -1,
       typeList: config.ruleTypeList,
+      ldsName: '',
       ruleTypeList: [],
       count: 0,
       currentPage: 1,
@@ -140,7 +141,7 @@ export default {
         'nextText': '>>'
       },
       pointsRuleVo: {
-        'type': 1
+        'type': ''
       },
       validFrom: {},
       ldList: [],

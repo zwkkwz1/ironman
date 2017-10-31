@@ -373,7 +373,7 @@ footer{
 	margin-top: 8px;
 }
 .popup select{
-	width: 161px;
+	width: 431px;
 	height: 24px;
 	padding: 0 0 0 10px;
 	font-size: 16px;

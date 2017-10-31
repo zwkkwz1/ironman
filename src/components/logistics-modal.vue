@@ -13,12 +13,14 @@
   	    <td class="tdRight" for="group">物流公司:</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.shipmentName"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">物流单号:</td>
   	    <td class="tdLeft">
 	  	    <input type="text" v-model="params.shipmentNo"/>
+	  	    <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	</table>

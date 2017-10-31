@@ -14,11 +14,13 @@
   	    <select v-model="params.postStatus">
 		      <option v-for="status in statusList" :value="status.code">{{ status.name }}</option>
         </select>
+        <span class="high-light">*</span>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="memo" style="vertical-align: top;">备注:</td>
   	    <td>
-  	      <textarea type="text" name="memo" v-model="params.memo" rows="5" wrap="450"></textarea>
+  	      <textarea name="memo" v-model="params.memo" rows="5" cols="50"></textarea>
+  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
@@ -80,7 +82,7 @@ export default { // 产品新增，编辑弹框
         if (data.type === 1) {
           console.log('获取可变更的状态成功')
           this.statusList = data.result.list
-          if (this.statusList.length === 0) {
+          if (this.statusList.length === 0 && this.type === 2) {
             this.errMsg = '没有可更改的状态'
           }
         } else if (data.type === 401) { // 登入信息验证失败
@@ -101,6 +103,13 @@ export default { // 产品新增，编辑弹框
         this.errMsg = '请将备注信息填写完整'
         this.hideMsg()
         return null
+      }
+      if (this.type === 2) {
+        if (!this.params.postStatus) {
+          this.errMsg = '请将备注信息填写完整'
+          this.hideMsg()
+          return null
+        }
       }
       this.axios({
         method: 'post',
@@ -151,7 +160,6 @@ export default { // 产品新增，编辑弹框
 
 <style scoped>
 textarea{
-	width: 321px;
 	border-radius: 3px;
 	margin-top: 6px;
 }

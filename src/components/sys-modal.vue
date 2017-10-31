@@ -1,10 +1,10 @@
 <template>
 <div>
   <div class="modal-backdrop fade in" modal-animation-class="fade" modal-backdrop="modal-backdrop" modal-animation="true" style="z-index: 1040;"></div>
-  <div v-drag class="popup">
-    <div class="head" style="text-align: center;width: 560px;">
-	    <h3></h3>
-		  <i class="icon-remove icon-white" @click="cancelEdit()"></i>			  	
+  <div class="popup" style="width: 700px;">
+    <div class="head" style="text-align: center;width: 700px;">
+      <h3></h3>
+	    <i class="icon-remove icon-white" @click="cancelEdit()"></i>			  	
 	  </div>
   	<legend>
   	  <title style="width: 100%;">字典信息</title>
@@ -13,51 +13,59 @@
   	  <tr>
   	    <td class="tdRight" for="code">字典编码:</td>
   	    <td>
-  	    	<span v-if="params.sid" v-text="params.code"></span>
-  	    	<input type="text" v-if="!params.sid" v-model="params.code" />
+  	      <span v-if="params.sid" v-text="params.code"></span>
+  	      <input type="text" v-if="!params.sid" v-model="params.code" />
+  	      <span v-if="!params.sid" class="high-light">*</span>
   	    </td>
    	  </tr>
   	  <tr>
-  	    <td class="tdRight" for="name">字典名称:	</td>
+  	    <td class="tdRight" for="name">字典名称:</td>
   	    <td>
   	      <input type="text" name="name" v-model="params.name" />
+  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">所属分类:</td>
   	    <select v-if="!params.sid" v-model="params.groupSid">
-		      <option v-for="group in groupCodeList" :value="group.sid">{{ group.name }}</option>
+          <option v-for="group in groupCodeList" :value="group.sid">{{ group.name }}</option>
         </select>
+        <span v-if="!params.sid" class="high-light">*</span>
         <span v-if="params.sid" v-text="params.groupName"></span>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="value1">值1:</td>
   	    <td>
   	      <input type="text" name="value1" v-model="params.value1" />
+  	      <span class="high-light">*</span>
   	    </td>
       </tr>
       <tr>
   	    <td class="tdRight" for="value2">值2:</td>
   	    <td>
   	      <input type="text" name="value2" v-model="params.value2" />
+  	      <span class="high-light">*</span>
   	    </td>
       </tr>
   	  <tr>
   	    <td class="tdRight" for="value3">值3:</td>
   	    <td>
   	      <input type="text" name="value3" v-model="params.value3" />
+  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="value4">值4:</td>
   	    <td>
   	      <input type="text" name="value4" v-model="params.value4" />
+  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="desc" style="vertical-align: top;">描述:</td>
   	    <td>
-  	    	<textarea name="desc" rows="3" cols="30" v-model="params.desc"></textarea>
+  	      <textarea name="desc" rows="5" cols="50" v-model="params.desc"></textarea>
+  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	</table>

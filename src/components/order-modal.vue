@@ -60,11 +60,21 @@
   	  </div>
   	  <div>
   	    <span class="tdRight">下单人信息：</span>
-  	    <span class="tdLeft">{{'姓名：' + params.name + '。工号：' + params.workNo + '。手机号：' + params.mobile}}</span>
+  	    <span class="tdLeft">
+  	      <div>{{'姓名：' + params.name + ' | 工号：' + params.workNo}}</div>
+  	      <div>{{ '手机号：' + params.mobile }}</div>
+  	    </span>
   	  </div>
   	  <div>
   	    <span class="tdRight">收货人信息：</span>
-  	    <span class="tdLeft">{{'姓名：' + params.shippingName + '。手机号：' + params.shippingPhone + '。地址：' + params.shippingAddress}}</span>
+  	    <span class="tdLeft">
+  	      <div>
+  	    	  {{'姓名：' + params.shippingName + ' | 手机号：' + params.shippingPhone}}
+  	      </div>
+  	      <div>
+  	        {{'地址：' + params.shippingAddress}}
+  	      </div>
+  	    </span>
   	  </div>
   	  <div>
   	    <span class="tdRight">外部平台的商品名称：</span>
@@ -85,7 +95,7 @@
   	</div>
   	<div style="text-align: right;margin: 10px 0;">
   	  <div class="btn-md btn-default btn-order" @click="creatDesc">新增备注</div>
-  	  <div class="btn-md btn-default btn-order" @click="creatStatus">修改状态</div>
+  	  <div v-show="canChangeStatus" class="btn-md btn-default btn-order" @click="creatStatus">修改状态</div>
   	  <div class="btn-md btn-default btn-order" @click="creatOrder">第三方订单信息</div>
   	  <div class="btn-md btn-default btn-order" @click="creatlogistics">第三方发货信息</div>
   	</div>
@@ -111,7 +121,7 @@
 	            <div v-text="index + 1"></div>
 	          </td>
 	          <td><div style="min-width:100px" v-text="memo.createdDt"></div></td>
-	          <td><div style="min-width:100px">{{orderStateList[memo.preStatus].name + '→' + orderStateList[memo.postStatus].name}}</div></td>
+	          <td><div style="min-width:100px">{{orderStateList[memo.preStatus].name + '→' + (memo.postStatus ? orderStateList[memo.postStatus].name : '')}}</div></td>
 	          <td><div style="min-width:200px" v-text="memo.memo"></div></td>
 	          <td><img height="70" style="vertical-align: bottom;" v-for="img in memo.images" :src="img"  @click="originalImg(img)"/></td>
 	        </tr>
@@ -127,9 +137,9 @@
       <img :src="originalUrl" alt="图片加载失败！！"/>
     </div>
   	<div v-if="loginPopup">
-	  	<login-popup @loginSuccess='loginSuccess'></login-popup>
-	  </div>
-	  <div v-if="memoModalShow">
+    	<login-popup @loginSuccess='loginSuccess'></login-popup>
+    </div>
+    <div v-if="memoModalShow">
       <memo-modal @cancel="modalEdit" :sid='params.sid' :type="modalType" @loginSuccess='loginSuccess'></memo-modal>
     </div>
     <div v-if="creatOrderShow">
@@ -154,12 +164,14 @@ export default {
       errMsg: '',
       loginPopup: false,
       memoList: [],
+      statusList: [],
       modalType: 0,
       memoModalShow: false,
       creatOrderShow: false,
       logisticsModalShow: false,
       showOriginal: false,
       originalUrl: '',
+      canChangeStatus: true,
       activeIndex: -1
     }
   },
@@ -171,6 +183,7 @@ export default {
       this.memoModalShow = false
       this.creatOrderShow = false
       this.logisticsModalShow = false
+      this.getCanChangeStatus()
     })
   },
   components: {
@@ -180,7 +193,7 @@ export default {
     logisticsModal
   },
   methods: {
-    getMemoList () {
+    getMemoList () { // 刷新备注列表
       this.axios({
         method: 'get',
         url: '/sys/order/memo/list',
@@ -201,6 +214,32 @@ export default {
         console.log('error信息是：' + error)
       })
     },
+    getCanChangeStatus () {
+      this.axios({
+        method: 'GET',
+        params: {'orderSid': this.params.sid},
+        url: '/sys/order/status/can-change-list'
+      }).then((response) => {
+        let data = response.data
+        if (data.type === 1) {
+          console.log('获取可变更的状态成功')
+          this.statusList = data.result.list
+          if (this.statusList.length === 0) {
+            this.canChangeStatus = false
+          } else {
+            this.canChangeStatus = true
+          }
+        } else if (data.type === 401) { // 登入信息验证失败
+          config.gotoLogin()
+          this.loginPopup = true
+        } else {
+          this.errMsg = '获取可变更的状态失败'
+          this.hideMsg()
+        }
+      }).catch((error) => {
+        console.log('error信息是：' + error)
+      })
+    },
     freshOrder () { // 刷新订单详情
       this.axios({
         method: 'get',
@@ -209,8 +248,7 @@ export default {
       }).then((response) => {
         let data = response.data
         if (data.type === 1) {
-          this.order = data.result
-          this.orderModelShow = true
+          this.params = data.result
         } else if (data.type === 401) { // 登入信息验证失败
           config.gotoLogin()
           this.loginPopup = true
@@ -253,6 +291,7 @@ export default {
       this.logisticsModalShow = false
       this.getMemoList() // 刷新备注列表
       this.freshOrder() // 刷新订单信息
+      this.getCanChangeStatus()
     },
     cancelEdit () {
       this.$emit('cancelEdit')

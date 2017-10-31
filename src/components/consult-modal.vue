@@ -3,14 +3,14 @@
   <div class="modal-backdrop fade in" modal-animation-class="fade" modal-backdrop="modal-backdrop" modal-animation="true" style="z-index: 1040;"></div>
   <div class="popup" style="left: 30%;top: 40px;width: 700px;font-size: 16px;height: 500px;overflow-x: hidden;overflow-y: auto;">
     <div class="head" style="text-align: center;width: 700px;">
-	  <p style="font-weight: bold;">资讯信息</p>
-	  <i class="icon-remove icon-white" @click="cancel()"></i>			  	
+	    <p style="font-weight: bold;">资讯信息</p>
+	    <i class="icon-remove icon-white" @click="cancel()"></i>			  	
     </div>
   	<table>
   	  <tr>
   	    <td class="tdRight" for="code">标题:</td>
   	    <td>
-  	      <input type="text" v-model="params.title" />
+  	      <input type="text" name="code" v-model="params.title" />
   	      <span class="high-light">*</span>
   	    </td>
    	  </tr>
@@ -23,21 +23,26 @@
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">所属部门:</td>
-  	    <select v-model="params.orgSid">
-          <option v-for="ld in ldList" :value="ld.sid">{{ ld.name }}</option>
-        </select>
-        <span class="high-light">*</span>
+  	    <td>
+  	      <select v-model="params.orgSid">
+  	      	<option :value="0"></option>
+            <option v-for="ld in ldList" :value="ld.sid">{{ ld.name }}</option>
+          </select>
+          <span class="high-light">*</span>
+  	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="group">类型:</td>
+  	    <td>
   	      <select v-model="params.type">
             <option v-for="type in typeList" :value="type.value">{{ type.name }}</option>
           </select>
           <span class="high-light">*</span>
+        </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="releasedAt">发布时间:</td>
-  	    <td style="width: 100px;">
+  	    <td>
   	      <datepicker v-model="releasedAt" language="zh" :highlighted="state.highlighted" :format="state.format"></datepicker>
   	      <span class="high-light">*</span>
   	    </td>
@@ -46,8 +51,8 @@
   	    <td class="tdRight" for="sortNum">排列序号:</td>
   	    <td>
   	      <input type="text" name="sortNum" v-model="params.sortNum" />
+  	      <span class="high-light">*</span>
   	    </td>
-  	    <span class="high-light">*</span>
       </tr>
       <tr class="time-pick">
   	    <td class="tdRight" for="startedAt">生效时间:</td>
@@ -84,7 +89,6 @@
   	      <label for="enabled">上架</label>
   	      <input type="radio" name="enabled" value="false" v-model="params.enabled" />
   	      <label for="enabled">下架</label>
-  	      <span class="high-light">*</span>
   	    </td>
   	  </tr>
   	</table>
@@ -159,6 +163,9 @@ export default { // 产品新增，编辑弹框
       }
       this.endedAt.date = this.params.endedAt.split(' ')[0]
       this.startedAt.date = this.params.startedAt.split(' ')[0]
+      if (this.params.releasedAt) {
+        this.releasedAt = this.params.releasedAt.split(' ')[0]
+      }
     })
   },
   components: {
@@ -181,12 +188,12 @@ export default { // 产品新增，编辑弹框
         return null
       }
       if (this.endedAt.date) {
-        this.params.endedAt = config.dateToString(new Date(this.endedAt.date), 'yyyy-MM-dd') + ' ' + this.endedAt.time + ':00'
+        this.params.endedAt = config.dateToString(new Date(this.endedAt.date), 'yyyy-MM-dd') + ' ' + (this.endedAt.time ? (this.endedAt.time + ':00') : '00:00:00')
       }
       if (this.startedAt.date) {
-        this.params.startedAt = config.dateToString(new Date(this.startedAt.date), 'yyyy-MM-dd') + ' ' + this.startedAt.time + ':00'
+        this.params.startedAt = config.dateToString(new Date(this.startedAt.date), 'yyyy-MM-dd') + ' ' + (this.startedAt.time ? (this.startedAt.time + ':00') : '00:00:00')
       }
-      if (!this.params.type || !this.params.imageSid || !this.params.title || !this.params.sortNum || !this.params.url || !this.params.orgSid) { // 检查表格完整性
+      if (!this.params.imageSid || !this.params.title || !this.params.sortNum || !this.params.url || !this.params.type) { // 检查表格完整性
         this.errMsg = '请将表格填写完整'
         this.hideMsg()
         return null

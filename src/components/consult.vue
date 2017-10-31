@@ -209,6 +209,9 @@ export default {
         this.validTo.date = config.dateToString(this.validTo.date, 'yyyy-MM-dd')
         this.consultVo.validTo = this.validTo.date + ' ' + this.validTo.time ? this.validTo.time : '00:00:00'
       }
+      if (this.consultVo.orgSids.length === this.ldList.length) {
+        this.consultVo.orgSids = []
+      }
       this.axios({
         method: 'post',
         data: this.consultVo,
