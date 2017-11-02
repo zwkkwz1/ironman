@@ -40,7 +40,7 @@ export default {
   props: ['loginResult'],
   mounted () {
     this.$nextTick(() => {
-      console.log(this.loginResult)
+      console.log('nav')
     })
   },
   watch: {
@@ -48,16 +48,6 @@ export default {
     $route: 'changeRoute'
   },
   methods: {
-//  splitJointNav () { // 通过登入信息拼写导航栏
-//    this.navHtml = ''
-//    for (var i = 0; i < this.loginResult.privileges.length; i++) {
-//      this.navHtml += `
-//        <a href="${this.loginResult.privileges[i].path}" class="${this.loginResult.privileges[i].imageUri}">
-//          <span style="margin-right: 20px;">${this.loginResult.privileges[i].name}</span>
-//        </a>
-//      `
-//    }
-//  },
     logout () { // 登出
       config.delCookie('accessToken')
       localStorage.clear()

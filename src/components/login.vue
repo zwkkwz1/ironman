@@ -4,8 +4,8 @@
   	  <div class="err-msg" v-text="errMsg" style="top: 17px;"></div>
   	  <p>
   	    <span class="username-icon login-username"></span>
+        <input placeholder="请输入登入账号" type="text" name="username" id="username" v-model="loginVo.username" />
   	  </p>
-	  <input placeholder="请输入登入账号" type="text" name="username" id="username" v-model="loginVo.username" />
 	  <p>
 	    <span class="password-icon login-password"></span>
 	    <input placeholder="请输入密码" type="text" name="password" id="password" v-model="loginVo.password" v-show="eyesOpen"/>
@@ -98,150 +98,6 @@ export default {
           this.axios.defaults.headers.get['accessToken'] = this.axios.defaults.headers.post['accessToken'] = data.result.token // 设置accessToken的cookie
           // todo： 将登入信息localstorage
           let result = data.result
-//        let result = { // 假数据
-//          'username': 'inettest',
-//          'name': '测试用户',
-//          'mail': 'inettest@deayea.com',
-//          'loginAt': '2017-08-08 22:16:08',
-//          'token': '661cb65a-1755-4938-a95c-08f9e69bf485',
-//          'groups': [
-//            'ironman-user',
-//            'ironman-admin'
-//          ],
-//          'privileges': [{
-//            'code': 'FST00002',
-//            'name': '字典管理',
-//            'category': 1,
-//            'path': '#/sys-config',
-//            'pathName': 'sysConfig',
-//            'relatedView': '@/components/sys-config',
-//            'relatedViewComponent': 'sysConfig',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }, {
-//            'code': 'FST000011',
-//            'name': '图片上传',
-//            'category': 1,
-//            'path': '#/img-upload',
-//            'pathName': 'orderAdmin',
-//            'relatedView': '@/components/order',
-//            'relatedViewComponent': 'orderAdmin',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }, {
-//            'code': 'FST00003',
-//            'name': '商品管理',
-//            'category': 1,
-//            'path': '#/commodity-admin',
-//            'pathName': 'commodityAdmin',
-//            'relatedView': '@/components/commodity-admin',
-//            'relatedViewComponent': 'commodityAdmin',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }, {
-//            'code': 'FST00004',
-//            'name': '商品分类',
-//            'category': 1,
-//            'path': '#/commodity-classification',
-//            'pathName': 'commodityClassification',
-//            'relatedView': '@/components/commodity-classification',
-//            'relatedViewComponent': 'commodityClassification',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }, {
-//            'code': 'FST00005',
-//            'name': '用户积分',
-//            'category': 1,
-//            'path': '#/user-points',
-//            'pathName': 'userPoints',
-//            'relatedView': '@/components/user-points',
-//            'relatedViewComponent': 'userPoints',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }, {
-//            'code': 'FST00006',
-//            'name': '字典分类',
-//            'category': 1,
-//            'path': '#/sys-group',
-//            'pathName': 'sysGroup',
-//            'relatedView': '@/components/sys-config-group',
-//            'relatedViewComponent': 'sysGroup',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }, {
-//            'code': 'FST00007',
-//            'name': '订单',
-//            'category': 1,
-//            'path': '#/order',
-//            'pathName': 'order',
-//            'relatedView': '@/components/order',
-//            'relatedViewComponent': 'order',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }, {
-//            'code': 'FST00008',
-//            'name': '资讯',
-//            'category': 1,
-//            'path': '#/information',
-//            'pathName': 'information',
-//            'relatedView': '@/components/consult',
-//            'relatedViewComponent': 'information',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }, {
-//            'code': 'FST00009',
-//            'name': '积分规则',
-//            'category': 1,
-//            'path': '#/points-rule-conf',
-//            'pathName': '积分规则管理',
-//            'relatedView': '@/components/points-rule-conf',
-//            'relatedViewComponent': 'pointsRuleConf',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }, {
-//            'code': 'FST000010',
-//            'name': '经验值历史',
-//            'category': 1,
-//            'path': '#/user-experience',
-//            'pathName': '经验值历史',
-//            'relatedView': '@/components/user-experience',
-//            'relatedViewComponent': 'userExperience',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }, {
-//            'code': 'FST000013',
-//            'name': '用户组管理',
-//            'category': 1,
-//            'path': '#/user-group',
-//            'pathName': '用户组管理',
-//            'relatedView': '@/components/user-group',
-//            'relatedViewComponent': 'userGroup',
-//            'level': 1,
-//            'hasChild': false,
-//            'imageUri': 'sc-icon',
-//            'parentSid': 0
-//          }]
-//        }
           this.$emit('setLoginInfo', result) // 将loginInfo传给App.vue
           localStorage.setItem('loginResult', JSON.stringify(result))
           if (!this.popup) {
@@ -251,6 +107,9 @@ export default {
             console.log('准备将result传入父组件')
             this.$emit('loginSuccess', result) // 将登入信息传入login-popup组件内，等待父组件将信息转发出去
           }
+        } else if (data.type === 4001) {
+          this.errMsg = '图形验证码请求次数太多'
+          this.hideMsg()
         } else {
           this.errMsg = data.msg
           this.hideMsg()

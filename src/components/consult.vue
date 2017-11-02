@@ -18,16 +18,14 @@
       </select>
   	</div>
   	<div>
-  	  <label for="lds">分类：</label>
+  	  <label for="lds">机务段：</label>
   	  <div class="category">
-  	  	<input type="text" name="lds" :title="ldsName" v-model="ldsName" />
+  	  	<input type="text" name="lds" :title="ldsName" v-model="ldsName" readonly />
         <div class="categorySelect">
-          <div class="btn-sm btn-default" style="margin: 10px 0 0 10px;" @click="selectAll">{{isSelect ? '取消' : '全选'}}</div>
-          <ul style="margin-top: 0;">
-            <li v-for="ld in ldList">
-              <input type="checkbox" :value="ld" v-model="lds" />{{ ld.name }}
-            </li>
-          </ul>
+          <div class="btn-sm btn-default" style="margin: 10px 0 0 10px;display: block;" @click="selectAll">{{isSelect ? '取消' : '全选'}}</div>
+          <li v-for="ld in ldList">
+            <input type="checkbox" :value="ld" v-model="lds" />{{ ld.name }}
+          </li>
         </div>
   	  </div>
   	</div>
@@ -145,8 +143,12 @@ export default {
       },
       ldList: [],
       lds: [],
-      validFrom: {},
-      validTo: {},
+      validFrom: {
+        'time': '00:00'
+      },
+      validTo: {
+        'time': '00:00'
+      },
       consult: {},
       state: {
         format: 'yyyy-MM-dd',
@@ -202,12 +204,12 @@ export default {
         }
       }
       if (this.validFrom.date) {
-        this.validFrom.date = config.dateToString(this.validFrom.date, 'yyyy-MM-dd')
-        this.consultVo.validFrom = this.validFrom.date + ' ' + this.validFrom.time ? this.validFrom.time : '00:00:00'
+        this.validFrom.date = config.dateToString(new Date(this.validFrom.date), 'yyyy-MM-dd')
+        this.consultVo.validFrom = this.validFrom.date + ' ' + (this.validFrom.time ? this.validFrom.time + ':00' : '00:00:00')
       }
       if (this.validTo.date) {
-        this.validTo.date = config.dateToString(this.validTo.date, 'yyyy-MM-dd')
-        this.consultVo.validTo = this.validTo.date + ' ' + this.validTo.time ? this.validTo.time : '00:00:00'
+        this.validTo.date = config.dateToString(new Date(this.validTo.date), 'yyyy-MM-dd')
+        this.consultVo.validTo = this.validTo.date + ' ' + (this.validTo.time ? this.validTo.time + ':00' : '00:00:00')
       }
       if (this.consultVo.orgSids.length === this.ldList.length) {
         this.consultVo.orgSids = []
@@ -295,9 +297,11 @@ export default {
     },
     ldsChange () { // 在分类里显示已选分类
       this.ldsName = ''
+      let nameList = []
       for (let key in this.lds) {
-        this.ldsName += this.lds[key].name + '、 '
+        nameList.push(this.lds[key].name)
       }
+      this.ldsName = nameList.join('.')
     },
     clickTr (i) {
       this.activeIndex = i

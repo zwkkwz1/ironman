@@ -22,7 +22,7 @@
   	    </td>
   	  </tr>
   	  <tr>
-  	    <td class="tdRight" for="group">所属部门:</td>
+  	    <td class="tdRight">所属部门:</td>
   	    <td>
   	      <select v-model="params.orgSid">
   	      	<option :value="0"></option>
@@ -32,7 +32,7 @@
   	    </td>
   	  </tr>
   	  <tr>
-  	    <td class="tdRight" for="group">类型:</td>
+  	    <td class="tdRight">类型:</td>
   	    <td>
   	      <select v-model="params.type">
             <option v-for="type in typeList" :value="type.value">{{ type.name }}</option>
@@ -65,12 +65,15 @@
   	    </td>
       </tr>
   	  <tr>
-  	    <td class="tdRight" style="vertical-align: top;">图片:</td>
+  	    <td class="tdRight" style="vertical-align: top;">
+  	      <span class="high-light">* </span>
+  	      <span>图片:</span>
+  	    </td>
   	    <td v-if="thumbnailModel">
   	    <div class="thumbnail-img" v-if="hasImg">
 		      <img height="70" :src="params.imageUrl" @click="originalImg(params.imageUrl)"
 		        onerror="javascript:this.src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496385415687&di=cfb8c3b6a69be436172b2fbcf2d35748&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F55%2F73%2F39I58PICCqK_1024.png'"/>
-		      <i class="icon-remove icon-black hide" @click="remove"></i>  	    		
+		      <i class="icon-remove icon-black hide" @click="remove"></i>
   	    </div>
         <div v-if="!hasImg">
           <div class="addTrainNo" style="left: 30px;"></div>
@@ -86,9 +89,9 @@
   	    <td class="tdRight" style="vertical-align: top;">状态:</td>
   	    <td>
   	      <input type="radio" name="enabled" value="true" v-model="params.enabled" />
-  	      <label for="enabled">上架</label>
+  	      <span for="enabled">上架</span>
   	      <input type="radio" name="enabled" value="false" v-model="params.enabled" />
-  	      <label for="enabled">下架</label>
+  	      <span for="enabled">下架</span>
   	    </td>
   	  </tr>
   	</table>
@@ -123,7 +126,7 @@ export default { // 产品新增，编辑弹框
       consultType: config.consultType,
       thumbnail: [],
       thumbnailModel: false,
-      imgUpUrl: 'http://192.168.0.242:8280/sys/image/create',
+      imgUpUrl: 'http://im-mapi.deayea.com/sys/image/create',
       uploadMsg: '',
       loginPopup: false,
       hasImg: true,

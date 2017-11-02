@@ -21,7 +21,7 @@
       <select v-model="pageSize">
 		    <option v-for="pageSize in pageSizeList" :value="pageSize">{{ pageSize }}</option>
       </select>
-      <span>共/</span>
+      <span>/共</span>
       <span>{{ totalRecs + '条' }}</span>
     </div>
     <div class="btn-sm" style="border: 1px solid #ccc;" @click="changePage(pageNo)">确定</div>

@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="modal-backdrop fade in" modal-animation-class="fade" modal-backdrop="modal-backdrop" modal-animation="true" style="z-index: 1040;"></div>
-  <div class="popup" style="left: 30%;top: 40px;width: 700px;font-size: 16px;height: 500px;overflow-x: hidden;overflow-y: auto;">
+  <div class="popup" style="margin: -300px 0 0 -350px;width: 700px;font-size: 16px;height: 600px;overflow-x: hidden;overflow-y: auto;">
     <div class="head" style="text-align: center;width: 700px;">
 	  <p style="font-weight: bold;">规则信息</p>
 	  <i class="icon-remove icon-white" @click="cancel()"></i>			  	
@@ -22,19 +22,19 @@
   	    </td>
   	  </tr>
   	  <tr>
-  	    <td class="tdRight" for="group">所属部门:</td>
+  	    <td class="tdRight">所属部门:</td>
   	    <select v-model="params.orgSid">
   	    	<option :value="0"></option>
           <option v-for="ld in ldList" :value="ld.sid">{{ ld.name }}</option>
         </select>
-        <span class="high-light">*</span>
+        <span class="high-light high-light-select">*</span>
   	  </tr>
   	  <tr>
-  	    <td class="tdRight" for="group">类 型:</td>
+  	    <td class="tdRight">类 型:</td>
   	    <select v-model="params.type">
           <option v-for="type in typeList" :value="type.value">{{ type.name }}</option>
         </select>
-        <span class="high-light">*</span>
+        <span class="high-light high-light-select">*</span>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="sortNum">排列序号:</td>
@@ -87,16 +87,16 @@
   	    <td class="tdRight" for="memo" style="vertical-align: top;">备 注:</td>
   	    <td>
   	    	<textarea name="memo" rows="5" cols="50" v-model="params.memo"></textarea>
-  	    	<span class="high-light">*</span>
+  	    	<span class="high-light" style="vertical-align: top;top: 5px;position: relative;">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" style="vertical-align: top;">状态:</td>
   	    <td>
   	      <input type="radio" name="enabled" value="true" v-model="params.enabled" />
-  	      <label for="enabled">上架</label>
+  	      <span for="enabled">上架</span>
   	      <input type="radio" name="enabled" value="false" v-model="params.enabled" />
-  	      <label for="enabled">下架</label>
+  	      <span for="enabled">下架</span>
   	    </td>
   	  </tr>
   	</table>
@@ -266,5 +266,8 @@ textarea{
   font-family: '微软雅黑';
   position: relative;
   top: 1px;
+}
+table{
+  font-family: "微软雅黑";
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="modal-backdrop fade in" modal-animation-class="fade" modal-backdrop="modal-backdrop" modal-animation="true" style="z-index: 1040;"></div>
-  <div class="popup" style="width: 1000px;padding: 20px;left: 25%;overflow: auto;">
+  <div class="popup" style="width: 1000px;padding: 20px;overflow: auto;margin: -300px 0 0 -500px;">
     <div class="head" style="text-align: center;width: 1040px;margin-left: -20px;">
 	    <h3></h3>
 		  <i class="icon-remove icon-white" @click="cancelEdit()"></i>			  	
@@ -129,7 +129,7 @@
 	    </table>
 	  </div>
   	<p class="err-msg" style="display: block;left: 78px;" v-text="errMsg"></p>
-  	<div v-if="showOriginal" class="popup" style="left: 650px;top: 150px;width: auto;height: auto;" v-drag>
+  	<div v-if="showOriginal" class="popup" style="width: auto;height: auto;" v-drag>
       <div class="img-head" style="text-align: center;">
         <h3></h3>
         <i class="icon-remove icon-white" @click="closeOriginalImg" style="top: -18px;"></i>			  	
@@ -309,8 +309,6 @@ export default {
 .popup{
   width: 560px;
   height: 600px;
-  top: 100px;
-  left: 679.5px;
 }
 .choose div{
   display: inline-block;

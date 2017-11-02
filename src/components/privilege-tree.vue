@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="modal-backdrop fade in" modal-animation-class="fade" modal-backdrop="modal-backdrop" modal-animation="true" style="z-index: 1040;"></div>
-  <div class="popup" style="left: 30%;top: 140px;width: 700px;font-size: 16px;height: 500px;overflow-x: hidden;overflow-y: auto;">
+  <div class="popup" style="margin: -250px 0 0 -350px;width: 700px;font-size: 16px;height: 500px;overflow-x: hidden;overflow-y: auto;">
 	  <div class="head" style="text-align: center;width: 700px;">
 	    <p style="font-weight: bold;"></p>
 		  <i class="icon-remove icon-white" @click="cancel()"></i>			  	

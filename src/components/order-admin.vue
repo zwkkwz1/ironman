@@ -7,7 +7,7 @@
     </select>
 	</div>
 	<div class="tdLeft">
-		<files-upload :type='type' url='http://192.168.0.242:8280/sys/image/create' @cancelUpload='cancelUpload'></files-upload>
+		<files-upload :type='type' url='http://im-mapi.deayea.com/sys/image/create' @cancelUpload='cancelUpload'></files-upload>
 	</div>
 	<!--附件上传end-->
   <div v-if="loginPopup">

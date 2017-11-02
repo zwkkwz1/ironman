@@ -53,7 +53,7 @@ export default { // 产品新增，编辑弹框
       errMsg: '',
       statusList: [],
       orderType: config.orderType,
-      imgUpUrl: 'http://192.168.0.242:8280/sys/image/create',
+      imgUpUrl: 'http://im-mapi.deayea.com/sys/image/create',
       loginPopup: false,
       params: {
         'sids': []

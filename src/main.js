@@ -15,7 +15,7 @@ Vue.component('file-upload', FileUpload)
 
 Vue.prototype.axios = axios
 // 设置默认请求头，以及host
-axios.defaults.baseURL = 'http://192.168.0.242:8280'
+axios.defaults.baseURL = 'http://im-mapi.deayea.com'
 axios.defaults.headers.post['AppType'] = axios.defaults.headers.get['AppType'] = 'web'
 axios.defaults.headers.post['Appid'] = axios.defaults.headers.get['Appid'] = 'ironman'
 let accessToken = config.getCookie('accessToken')

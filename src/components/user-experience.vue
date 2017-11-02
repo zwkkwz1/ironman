@@ -24,7 +24,7 @@
   <div class="table">
 	<table style="min-width: 600px;width: 100%;" class="table-hover">
 	  <colgroup>
-		<col style="width:40px;" />
+		<!--<col style="width:40px;" />-->
 		<col />
 		<col />
 		<col />
@@ -39,7 +39,7 @@
 		<col />
 	  </colgroup>
 	  <thead>
-	    <th style="width:40px">序号</th>
+	    <!--<th style="width:40px">序号</th>-->
 	    <th>司机工号</th>
 	    <th>出勤sid</th>
 	    <th>规则sid</th>
@@ -56,10 +56,10 @@
 	  </thead>
 	  <tbody>
       <tr v-for="(userEx, index) in useExList" @click="clickTr(index)" :class="{tableActive: activeIndex === index}">
-	      <td>
+	      <!--<td>
           <div v-text="index + 1"></div>
-        </td>
-        <td><div style="min-width:60px;" v-text="userEx.workNo"></div></td>
+        </td>-->
+        <td><div style="min-width:60px;">{{ userEx.driverName + '（' + userEx.workNo + '）' }}</div></td>
         <td><div style="min-width:60px;" v-text="userEx.onDutySid"></div></td>
         <td><div style="min-width:60px;" v-text="userEx.confSid"></div></td>
         <td><div style="min-width:140px;" v-text="userEx.confName"></div></td>
@@ -79,7 +79,7 @@
   </div>
   <div v-if="paramsShow">
     <div class="modal-backdrop fade in" modal-animation-class="fade" modal-backdrop="modal-backdrop" modal-animation="true" style="z-index: 1040;"></div>
-    <div class="popup" style="left: 30%;top: 100px;width: 950px;font-size: 16px;height: 600px;overflow: auto;">
+    <div class="popup" style="margin: -300px 0 0 -450px;width: 950px;font-size: 16px;height: 600px;overflow: auto;">
       <div class="head" style="text-align: center;width: 950px;">
 	      <h3></h3>
 	  	  <i class="icon-remove icon-white" @click="cancelParams()"></i>			  	
@@ -192,8 +192,12 @@ export default {
       useExList: [],
       loginPopup: false,
       paramsShow: false,
-      from: {},
-      to: {},
+      from: {
+        'time': '00:00'
+      },
+      to: {
+        'time': '00:00'
+      },
       state: {
         format: 'yyyy-MM-dd',
         highlighted: {
@@ -217,12 +221,12 @@ export default {
   methods: {
     userPointsQuery () { // 获取商品列表
       if (this.from.date) {
-        this.from.date = config.dateToString(this.from.date, 'yyyy-MM-dd')
-        this.consultVo.from = this.from.date + ' ' + this.from.time ? this.from.time : '00:00:00'
+        this.from.date = config.dateToString(new Date(this.from.date), 'yyyy-MM-dd')
+        this.userExVo.from = this.from.date + ' ' + (this.from.time ? this.from.time + ':00' : '00:00:00')
       }
       if (this.to.date) {
-        this.to.date = config.dateToString(this.to.date, 'yyyy-MM-dd')
-        this.consultVo.to = this.to.date + ' ' + this.to.time ? this.to.time : '00:00:00'
+        this.to.date = config.dateToString(new Date(this.to.date), 'yyyy-MM-dd')
+        this.userExVo.to = this.to.date + ' ' + (this.to.time ? this.to.time + ':00' : '00:00:00')
       }
       this.axios({
         method: 'post',

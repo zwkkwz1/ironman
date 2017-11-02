@@ -1,19 +1,12 @@
 <template>
 <div>
   <div class="modal-backdrop fade in" modal-animation-class="fade" modal-backdrop="modal-backdrop" modal-animation="true" style="z-index: 1040;"></div>
-  <div class="popup" style="left: 30%;top: 80px;width: 700px;font-size: 16px;height: 500px;overflow-x: hidden;overflow-y: auto;">
+  <div class="popup" style="margin-left: -350px;top: 80px;width: 700px;font-size: 16px;height: 500px;overflow-x: hidden;overflow-y: auto;">
     <div class="head" style="text-align: center;width: 700px;">
 	    <p style="font-weight: bold;">商品信息</p>
 		  <i class="icon-remove icon-white" @click="cancel()"></i>			  	
 	  </div>
   	<table>
-  	  <tr>
-  	    <td class="tdRight" for="code">货号:</td>
-  	    <td>
-  	    	<input v-focus type="text" v-model="params.no" />
-  	    	<span class="high-light">*</span>
-  	    </td>
-   	  </tr>
   	  <tr>
   	    <td class="tdRight" for="name">名称:	</td>
   	    <td>
@@ -29,7 +22,7 @@
         <span class="high-light">*</span>
   	  </tr>
   	  <tr>
-  	    <td class="tdRight" for="points">所需价格:</td>
+  	    <td class="tdRight" for="points">所需积分:</td>
   	    <td>
   	      <input type="text" name="points" v-model="params.points" />
   	      <span class="high-light">*</span>
@@ -47,9 +40,11 @@
   	    <td>
   	      <datepicker v-model="startedAt.date" language="zh" :highlighted="state.highlighted" :format="state.format"></datepicker>
   	      <input type="time" class="time-input" v-model="startedAt.time" />
+  	      <span class="high-light">*</span>
   	      <p>到</p>
   	      <datepicker v-model="endedAt.date" language="zh" :highlighted="state.highlighted" :format="state.format"></datepicker>
   	      <input type="time" class="time-input" v-model="endedAt.time" />
+  	      <span class="high-light">*</span>
   	    </td>
       </tr>
   	  <tr>
@@ -71,6 +66,7 @@
   	    	<div class="thumbnail-img" v-if="hasImg">
 					  <img height="90" :src="params.thumbnail.url" @click="originalImg(params.thumbnail.url)"
 					  	onerror="javascript:this.src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496385415687&di=cfb8c3b6a69be436172b2fbcf2d35748&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F55%2F73%2F39I58PICCqK_1024.png'"/>
+					  <span class="high-light" style="position: absolute;top: 5px;left: 90px;">*</span>
 					  <i class="icon-remove icon-black hide" @click="remove"></i>  	    		
   	    	</div>
 					<div v-if="!hasImg">
@@ -87,12 +83,14 @@
   	    <td class="tdRight" style="vertical-align: top;">详情图:</td>
   	    <td>
   	      <files-upload :type='productType' :imgUrls='params.detailImages' :url='imgUpUrl' @transmitImgInfo='getDetailImg'></files-upload>
+  	      <span class="high-light" style="vertical-align: top;">*</span>
   	    </td>
   	  </tr>
   	  <tr>
   	    <td class="tdRight" style="vertical-align: top;">头图:</td>
   	    <td>
   	      <files-upload :type='productType' :imgUrls='params.headerImages' :url='imgUpUrl' @transmitImgInfo='getHeaderImg'></files-upload>
+  	      <span class="high-light" style="vertical-align: top;">*</span>
   	    </td>
   	  </tr>
   	</table>
@@ -129,7 +127,7 @@ export default { // 产品新增，编辑弹框
       productType: config.productType,
       thumbnail: [],
       thumbnailModel: false,
-      imgUpUrl: 'http://192.168.0.242:8280/sys/image/create',
+      imgUpUrl: 'http://im-mapi.deayea.com/sys/image/create',
       uploadMsg: '',
       loginPopup: false,
       hasImg: true,
@@ -180,7 +178,7 @@ export default { // 产品新增，编辑弹框
   },
   methods: {
     productVoSubmit () { // 提交
-      if (!this.params.categorySid || !this.params.no || !this.params.name || (!this.params.points && this.params.points !== '0') || !this.params.sortNum ||
+      if (!this.params.categorySid || !this.params.name || (!this.params.points && this.params.points !== '0') || !this.params.sortNum ||
        !this.params.detail || !this.params.thumbnail.url || !this.params.thumbnail.sid ||
        !this.params.headerImages || this.params.headerImages.length === 0 || !this.params.detailImages || this.params.detailImages.length === 0) { // 检查表格完整性
         this.errMsg = '请将表格填写完整'
@@ -292,7 +290,7 @@ textarea{
 	margin-top: 6px;
 }
 .thumbnail-img{
-	width: 90px;
+	width: 95px;
   position: relative;
 }
 .thumbnail-img:hover > i{

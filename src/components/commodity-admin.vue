@@ -20,14 +20,13 @@
   	<div>
   	  <label for="categorySids">分类：</label>
   	  <div class="category">
-  	  	<input type="text" name="categorySids" id="categorySids" :title="categorysName" v-model="categorysName" />
+  	  	<input type="text" name="categorySids" id="categorySids" :title="categorysName" v-model="categorysName" readonly />
         <div class="categorySelect">
-          <div class="btn-sm btn-default" style="margin: 10px 0 0 10px;" @click="selectAll">{{isSelect ? '取消' : '全选'}}</div>
-          <ul style="margin-top: 0;">
-            <li v-for="category in categoryList">
-              <input type="checkbox" :value="category" v-model="categorys" />{{ category.name }}
-            </li>
-          </ul>
+          <div class="btn-sm btn-default" style="margin: 10px 0 0 10px;display: block;" @click="selectAll">{{isSelect ? '取消' : '全选'}}</div>
+          <label v-for="category in categoryList">
+            <input type="checkbox" :value="category" v-model="categorys" />
+            <span v-text="category.name"></span>
+          </label>
         </div>
   	  </div>
   	</div>
@@ -68,7 +67,7 @@
 	    <th>图 片</th>
 	    <th>商品名称</th>
 	    <th>所属分类</th>
-	    <th>预览</th>
+	    <th>状态</th>
 	    <th>兑换所需积分</th>
 	    <!--<th>兑换经验值门槛</th>-->
 	    <th>排列序号</th>
@@ -82,7 +81,7 @@
           </td>
           <td><div style="min-width:100px" v-text="product.name"></div></td>
           <td><div style="min-width:100px" v-text="product.categoryName"></div></td>
-          <td><div style="min-width:100px">{{ product.preview ? '是' : '否' }}</div></td>
+          <td><div style="min-width:100px">{{ (product.enabled ? '上架 ' : '下架 ') + (product.preview ? '预览' : '') }}</div></td>
           <td><div style="min-width:100px" v-text="product.points"></div></td>
           <!--<td><div style="min-width:100px" v-text="product.experience"></div></td>-->
           <td><div style="min-width:100px" v-text="product.sortNum"></div></td>
@@ -127,8 +126,12 @@ export default {
       categorysName: '',
       productVo: [],
       currentPage: 1,
-      validFrom: {},
-      validTo: {},
+      validFrom: {
+        'time': '00:00'
+      },
+      validTo: {
+        'time': '00:00'
+      },
       count: 0,
       pageSize: 10,
       totalRecs: '',
@@ -315,9 +318,11 @@ export default {
     },
     categorysChange () { // 在分类里显示已选分类
       this.categorysName = ''
+      let nameList = []
       for (let key in this.categorys) {
-        this.categorysName += this.categorys[key].name + '、 '
+        nameList.push(this.categorys[key].name)
       }
+      this.categorysName = nameList.join('.')
     },
     clickTr (i) {
       this.activeIndex = i

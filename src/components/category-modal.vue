@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="modal-backdrop fade in" modal-animation-class="fade" modal-backdrop="modal-backdrop" modal-animation="true" style="z-index: 1040;"></div>
-  <div class="popup" style="left: 34%;top: 10%;width: 600px;font-size: 16px;height: 450px;overflow-x: hidden;overflow-y: auto;">
+  <div class="popup" style="width: 600px;margin: -225px 0 0 -300px;font-size: 16px;height: 450px;overflow-x: hidden;overflow-y: auto;">
     <div class="head" style="text-align: center;">
 	    <h3></h3>
 		  <i class="icon-remove icon-white" @click="cancel()"></i>			  	
@@ -31,6 +31,7 @@
 					  <img height="90" :src="params.image.url" @click="originalImg(params.image.url)"
 					  	onerror="javascript:this.src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496385415687&di=cfb8c3b6a69be436172b2fbcf2d35748&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F55%2F73%2F39I58PICCqK_1024.png'" />
 					  <i class="icon-remove icon-black hide" @click="remove"></i>  	    		
+  	    	  <span class="high-light" style="position: absolute;top: 5px;left: 90px;">*</span>
   	    	</div>
 					<div v-if="!hasImg">
 					  <div class="addTrainNo" style="left: 30px;"></div>
@@ -46,7 +47,7 @@
   	    <td class="tdRight" for="memo" style="vertical-align: top;">备注:</td>
   	    <td>
   	    	<textarea name="memo" rows="5" cols="50" v-model="params.memo"></textarea>
-  	    	<span class="high-light">*</span>
+  	    	<span class="high-light" style="vertical-align: top;">*</span>
   	    </td>
   	  </tr>
   	  <tr>
@@ -59,7 +60,7 @@
   	    </td>
   	  </tr>
   	</table>
-    <div v-if="showOriginal" class="popup" style="left: 650px;top: 150px;" v-drag>
+    <div v-if="showOriginal" class="popup" style="left: 30%;top: 0;" v-drag>
       <div class="img-head" style="text-align: center;">
         <h3></h3>
         <i class="icon-remove icon-white" @click="closeOriginalImg" style="top: -18px;"></i>			  	
@@ -90,7 +91,7 @@ export default {
       categoryType: config.categoryType,
       thumbnail: [],
       uploadMsg: '',
-      imgUploadUrl: 'http://192.168.0.242:8280/sys/image/create',
+      imgUploadUrl: 'http://im-mapi.deayea.com/sys/image/create',
       loginPopup: false,
       hasImg: true,
       showOriginal: false,
@@ -211,7 +212,7 @@ textarea{
 	margin-top: 6px;
 }
 .category-img{
-  width: 90px;
+	width: 90px;
   position: relative;
 }
 .category-img:hover > i{

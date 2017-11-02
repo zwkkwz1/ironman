@@ -22,12 +22,10 @@
   	  <div class="category">
   	  	<input type="text" name="stateIds" :title="stateName" v-model="stateName" readonly/>
         <div class="categorySelect">
-          <div class="btn-sm btn-default" style="margin: 10px 0 0 10px;" @click="selectAll">{{isSelect ? '取消' : '全选'}}</div>
-          <ul style="margin-top: 0;">
-            <li v-for="state in stateList">
-              <input type="checkbox" :value="state" v-model="states" />{{ state.name }}
-            </li>
-          </ul>
+          <div class="btn-sm btn-default" style="margin: 10px 0 0 10px;display: block;" @click="selectAll">{{isSelect ? '取消' : '全选'}}</div>
+          <label v-for="state in stateList">
+            <input type="checkbox" :value="state" v-model="states" />{{ state.name }}
+          </label>
         </div>
   	  </div>
   	</div>
@@ -160,15 +158,16 @@ export default {
   },
   methods: {
     getOrderList () { // 获取系统设置列表
+      this.orderVo.statusList = []
       for (let key in this.states) {
         this.orderVo.statusList.push(this.states[key].code)
       }
       if (this.from.date) {
-        this.from.date = config.dateToString(this.from.date, 'yyyy-MM-dd')
+        this.from.date = config.dateToString(new Date(this.from.date), 'yyyy-MM-dd')
         this.orderVo.from = this.from.date + ' ' + this.from.time ? this.from.time : '00:00:00'
       }
       if (this.to.date) {
-        this.to.date = config.dateToString(this.to.date, 'yyyy-MM-dd')
+        this.to.date = config.dateToString(new Date(this.to.date), 'yyyy-MM-dd')
         this.orderVo.to = this.to.date + ' ' + this.to.time ? this.to.time : '00:00:00'
       }
       this.axios({
@@ -219,9 +218,11 @@ export default {
     },
     stateChange () { // 在分类里显示已选分类
       this.stateName = ''
+      let nameList = []
       for (let key in this.states) {
-        this.stateName += this.states[key].name + '、 '
+        nameList.push(this.states[key].name)
       }
+      this.stateName = nameList.join('.')
     },
     selectAll () {
       this.isSelect = !this.isSelect

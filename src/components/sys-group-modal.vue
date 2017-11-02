@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="modal-backdrop fade in" modal-animation-class="fade" modal-backdrop="modal-backdrop" modal-animation="true" style="z-index: 1040;"></div>
-  <div v-drag class="popup" style="height: 230px;width: 600px;">
+  <div v-drag class="popup" style="height: 230px;width: 600px;margin: -115px 0 0 -300px;">
     <div class="head" style="text-align: center;width: 600px;">
       <h3></h3>
         <i class="icon-remove icon-white" @click="cancelEdit()"></i>			  	
@@ -104,8 +104,6 @@ export default {
 .popup{
   width: 560px;
   height: 600px;
-  top: 100px;
-  left: 679.5px;
 }
 .btn-table{
   position: relative;

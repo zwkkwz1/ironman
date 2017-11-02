@@ -53,7 +53,7 @@ export default { // todo,在app.vue里1：拼写nav，2：从localStorage获取�
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -267,6 +267,8 @@ legend input{
   background: #fff;
   position: fixed;
   text-align: left;
+  left: 50%;
+  top: 50%;
   box-shadow:  0 3px 10px #101010;
 }
 .popup title{ /*弹框title样式*/
@@ -471,9 +473,6 @@ input[type="radio"]{
 .vdp-datepicker div{
   display: inline-block;
 }
-input[type='checkbox']{
-  width: auto;
-}
 td img{
   margin: 8px;
   border: 1px solid #9D9D9D;
@@ -483,5 +482,22 @@ td img{
 }
 .high-light{
 	color: red;
+	display: inline-block;
+}
+.high-light-select{
+  margin-left: 5px;
+}
+input[type='checkbox']{
+  margin: 0;
+  position: relative;
+  top: 3px;
+  width: auto;
+}
+input[type='time']{
+  font-family: "微软雅黑";
+}
+label{
+  margin-left: 10px;
+  display: inline-block;
 }
 </style>
