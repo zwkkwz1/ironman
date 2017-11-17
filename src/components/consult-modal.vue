@@ -190,6 +190,7 @@ export default { // 产品新增，编辑弹框
         this.hideMsg()
         return null
       }
+      this.params.orgSid = this.params.orgSid ? this.params.orgSid : '0'
       if (this.endedAt.date) {
         this.params.endedAt = config.dateToString(new Date(this.endedAt.date), 'yyyy-MM-dd') + ' ' + (this.endedAt.time ? (this.endedAt.time + ':00') : '00:00:00')
       }

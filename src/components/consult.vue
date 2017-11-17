@@ -284,7 +284,9 @@ export default {
     },
     create () { // 新增
       this.consultMod = true
-      this.consult = {}
+      this.consult = {
+        'type': this.consultVo.type
+      }
     },
     selectAll () {
       this.isSelect = !this.isSelect

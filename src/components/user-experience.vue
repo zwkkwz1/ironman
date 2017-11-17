@@ -40,7 +40,7 @@
 	  </colgroup>
 	  <thead>
 	    <!--<th style="width:40px">序号</th>-->
-	    <th>司机工号</th>
+	    <th>司机姓名(工号)</th>
 	    <th>出勤sid</th>
 	    <th>规则sid</th>
 	    <th>规则名称</th>

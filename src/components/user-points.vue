@@ -241,6 +241,7 @@ export default {
           this.userPointList = data.result.resultList
           this.currentPage = data.result.pageNo // 当前页
           this.count = data.result.totalPages // 总页数
+          this.totalRecs = data.result.totalRecs
         } else if (data.type === 401) { // 登入信息验证失败
           config.gotoLogin()
           this.loginPopup = true
